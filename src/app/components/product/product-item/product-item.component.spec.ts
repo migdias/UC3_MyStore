@@ -1,3 +1,5 @@
+import { HttpClientModule } from '@angular/common/http'
+import { NO_ERRORS_SCHEMA } from '@angular/core'
 import { type ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { ProductItemComponent } from './product-item.component'
@@ -8,7 +10,11 @@ describe('ProductItemComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ProductItemComponent]
+      declarations: [ProductItemComponent],
+      imports: [HttpClientModule],
+      schemas: [
+        NO_ERRORS_SCHEMA
+      ]
     })
       .compileComponents()
 
