@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { type Product } from '../models/product'
-import { Observable } from 'rxjs'
 import { HttpClient } from '@angular/common/http'
+import { Observable } from 'rxjs'
 
 @Injectable({
   providedIn: 'root'
@@ -9,19 +9,9 @@ import { HttpClient } from '@angular/common/http'
 export class ProductService {
   private readonly _jsonURL = '/assets/data.json'
   productList: Product[] = []
-  constructor (private readonly http: HttpClient) {
-    this.getJSON().subscribe(data => { this.productList = data })
-  }
+  constructor (private readonly http: HttpClient) { }
 
-  getJSON (): Observable<any> {
-    return this.http.get(this._jsonURL)
-  }
-
-  getProducts (): Product[] {
-    return this.productList
-  }
-
-  getProductByID (id: number): Product {
-    return this.productList.filter(p => p.id === id)[0]
+  getProducts (): Observable<Product[]> {
+    return this.http.get<Product[]>(this._jsonURL)
   }
 }

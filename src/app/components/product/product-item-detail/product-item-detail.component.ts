@@ -20,10 +20,14 @@ export class ProductItemDetailComponent implements OnInit {
     private readonly routes: ActivatedRoute, private readonly cartService: CartService) {}
 
   ngOnInit (): void {
+    // Get the ID clicked
     this.sub = this.routes.params.subscribe(params => {
       this.id = Number(params['id'])
     })
-    this.product = this.productService.getProductByID(this.id)
+    // Get the product by ID
+    this.productService.getProducts().subscribe((data) => {
+      this.product = data.filter(p => p.id === this.id)[0]
+    })
   }
 
   addToCart (): void {
