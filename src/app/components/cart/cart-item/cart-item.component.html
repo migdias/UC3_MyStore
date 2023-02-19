@@ -1,0 +1,7 @@
+<img [src]="productCart.product.url">
+<div class="cart-item-details">
+    <h5>{{productCart.product.name}}</h5>
+    <p>€{{productCart.product.price}}</p>
+    <input class="number-input" type="number" name="quantity" [(ngModel)]="productCart.quantity" #t (ngModelChange)="onChange($event)"/>
+    <button (click)="remove(productCart)" style="margin-top: 10px;" class="btn btn-secondary">Remove</button>
+</div>

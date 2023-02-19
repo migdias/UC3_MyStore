@@ -1,0 +1,26 @@
+
+<div class="empty-cart-message" *ngIf="productCartList.length === 0">
+    <h2>The cart is empty.</h2>
+</div>
+<div class="cart-container" *ngIf="productCartList.length !== 0">
+    <div>
+        <app-cart-item class="cart-item" *ngFor="let productCart of productCartList" [productCart]="productCart" (newQuantity)="reCalc($event)" (removeProduct)="removeProduct($event)"></app-cart-item>
+        <h4>Total: €{{totalCartPrice}}</h4>
+    </div>
+    <form #form="ngForm" class="cart-panel" (ngSubmit)="onSubmit()">
+        <div class="form-margin">
+            <h5>Full Name</h5>
+            <input class="form-control" type="text" required minlength="3" placeholder="(Minimum 3 characters)" size="50" [(ngModel)]="userFullName" name="name">
+        </div>
+        <div class="form-margin">
+            <h5>Address</h5>
+            <input class="form-control" type="text" required minlength="6" placeholder="(Minimum 6 characters)" size="50" [(ngModel)]="userAddress" name="address">
+        </div>
+        <div class="form-margin">
+            <h5>Credit Card Number</h5>
+            <input class="form-control" type="text" required minlength="16" maxlength="16" placeholder="(16-Digit Number)" size="50" [(ngModel)]="userCCNumber" name="cc">
+        </div>
+        <p style="color: grey; font-size: small;">We will not share your payment information with anyone.</p>
+        <button type="submit" [disabled]="form.invalid" class="btn btn-primary">Make Order</button>
+    </form>
+</div>
