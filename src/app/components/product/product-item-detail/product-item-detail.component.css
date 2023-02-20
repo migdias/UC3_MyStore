@@ -23,3 +23,8 @@ img {
 .back-link {
     margin-top: 8px;
 }
+
+.button-clicked {
+    background-color: #20bd4a;
+    border: none;
+}

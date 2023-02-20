@@ -18,21 +18,24 @@ export class CartComponent implements OnInit {
   userAddress: string = ''
   userCCNumber: string = ''
 
-  constructor (private readonly cartService: CartService, private readonly router: Router, private readonly userService: UserService) {}
+  alertActive = false
+  removedProductName = ''
+
+  constructor (
+    private readonly cartService: CartService,
+    private readonly router: Router,
+    private readonly userService: UserService) { }
 
   ngOnInit (): void {
-    this.productCartList = this.cartService.getCart()
-    this.totalCartPrice = this.cartService.getTotalCartPrice()
+    this.refreshCart()
   }
 
   reCalc (pc: ProductCart): void {
     if (pc.quantity <= 0) {
-      this.cartService.removeProductFromCart(pc.product.id)
+      this.removeProduct(pc)
     } else {
-      this.cartService.recalculateAfterQuantityChange(pc)
-      this.totalCartPrice = this.cartService.getTotalCartPrice()
+      this.onChangeQuantity(pc)
     }
-    this.productCartList = this.cartService.getCart()
   }
 
   onSubmit (): void {
@@ -47,6 +50,20 @@ export class CartComponent implements OnInit {
 
   removeProduct (pc: ProductCart): void {
     this.cartService.removeProductFromCart(pc.product.id)
+    this.refreshCart()
+    this.alertActive = true
+    this.removedProductName = pc.product.name
+    setTimeout(() => {
+      this.alertActive = false
+    }, 3000)
+  }
+
+  onChangeQuantity (pc: ProductCart): void {
+    this.cartService.recalculateAfterQuantityChange(pc)
+    this.refreshCart()
+  }
+
+  refreshCart (): void {
     this.productCartList = this.cartService.getCart()
     this.totalCartPrice = this.cartService.getTotalCartPrice()
   }

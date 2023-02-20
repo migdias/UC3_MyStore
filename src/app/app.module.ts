@@ -10,7 +10,7 @@ import { ProductItemComponent } from './components/product/product-item/product-
 import { ProductItemDetailComponent } from './components/product/product-item-detail/product-item-detail.component'
 import { HeaderComponent } from './layout/header/header.component'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
-import { FormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http'
 import { CartItemComponent } from './components/cart/cart-item/cart-item.component'
 
@@ -30,6 +30,7 @@ import { CartItemComponent } from './components/cart/cart-item/cart-item.compone
     AppRoutingModule,
     NgbModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule
   ],
   providers: [],

@@ -9,7 +9,10 @@ import { CartService } from 'src/app/services/cart.service'
 })
 export class ProductItemComponent {
   @Input() product: Product
+  // @Output() showAlert = new EventEmitter<[boolean, string]>()
   quantity: number = 1
+  isClicked = false
+  buttonText = 'Add to Cart'
 
   constructor (private readonly cartService: CartService) {
     this.product = {
@@ -23,6 +26,15 @@ export class ProductItemComponent {
 
   addToCart (): void {
     this.cartService.addProductToCart(this.product, this.quantity)
-    alert('Product added to cart.')
+    // this.showAlert.emit([true, this.product.name])
+  }
+
+  onClick (): void {
+    this.buttonText = 'Added'
+    this.isClicked = true
+    setTimeout(() => {
+      this.isClicked = false
+      this.buttonText = 'Add to Cart'
+    }, 2000)
   }
 }

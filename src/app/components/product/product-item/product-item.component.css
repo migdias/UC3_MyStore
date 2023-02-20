@@ -18,4 +18,11 @@
 .select-input {
     width: 108px;
     margin-bottom: 8px;
+    transition: background-color 0.7s ease;
+}
+
+.button-clicked {
+    background-color: #20bd4a;
+    border: none;
+    transition: background-color 0.7s ease;
 }

@@ -13,6 +13,8 @@ export class ProductItemDetailComponent implements OnInit {
   product: Product = new Product()
   id: number = 0
   quantity: number = 1
+  buttonColorChange = false
+  buttonText = 'Add to Cart'
   // eslint-disable-next-line @typescript-eslint/prefer-readonly
   private sub: any
 
@@ -32,6 +34,14 @@ export class ProductItemDetailComponent implements OnInit {
 
   addToCart (): void {
     this.cartService.addProductToCart(this.product, this.quantity)
-    alert('Product added to cart.')
+  }
+
+  onClick (): void {
+    this.buttonText = 'Added'
+    this.buttonColorChange = true
+    setTimeout(() => {
+      this.buttonColorChange = false
+      this.buttonText = 'Add to Cart'
+    }, 2000)
   }
 }

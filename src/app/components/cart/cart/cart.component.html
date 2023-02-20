@@ -1,4 +1,6 @@
-
+<ngb-alert *ngIf="alertActive" [type]="'success'">
+    {{ removedProductName }} was removed from cart.
+</ngb-alert>
 <div class="empty-cart-message" *ngIf="productCartList.length === 0">
     <h2>The cart is empty.</h2>
 </div>
@@ -8,19 +10,54 @@
         <h4>Total: €{{totalCartPrice}}</h4>
     </div>
     <form #form="ngForm" class="cart-panel" (ngSubmit)="onSubmit()">
-        <div class="form-margin">
-            <h5>Full Name</h5>
-            <input class="form-control" type="text" required minlength="3" placeholder="(Minimum 3 characters)" size="50" [(ngModel)]="userFullName" name="name">
+        <div class="form-group">
+            <div class="form-margin">
+                <h5>Full Name</h5>
+                <input class="form-control" type="text" required minlength="3" placeholder="(Minimum 3 characters)" size="50"
+                    [(ngModel)]="userFullName" name="name">
+            </div>
+            <ngb-alert *ngIf="form.controls['name'].invalid && form.controls['name'].touched" [type]="'warning'">
+                <div *ngIf="form.controls['name'].errors">
+                    <div *ngIf="form.controls['name'].errors['required']">
+                        Name is required.
+                    </div>
+                    <div *ngIf="form.controls['name'].errors['minlength']">
+                        The name needs to be at least 3 characters.
+                    </div>
+                </div>
+            </ngb-alert>
+            <div class="form-margin">
+                <h5>Address</h5>
+                <input class="form-control" type="text" required minlength="6" placeholder="(Minimum 6 characters)" size="50"
+                    [(ngModel)]="userAddress" name="address">
+            </div>
+            <ngb-alert *ngIf="form.controls['address'].invalid && form.controls['address'].touched" [type]="'warning'">
+                <div *ngIf="form.controls['address'].errors">
+                    <div *ngIf="form.controls['address'].errors['required']">
+                        Address is required.
+                    </div>
+                    <div *ngIf="form.controls['address'].errors['minlength']">
+                        The Address needs to be at least 6 characters.
+                    </div>
+                </div>
+            </ngb-alert>
+            <div class="form-margin">
+                <h5>Credit Card Number</h5>
+                <input class="form-control" type="text" required minlength="16" maxlength="16" placeholder="(16-Digit Number)"
+                    size="50" [(ngModel)]="userCCNumber" name="cc">
+            </div>
+            <ngb-alert *ngIf="form.controls['cc'].invalid && form.controls['cc'].touched" [type]="'warning'">
+                <div *ngIf="form.controls['cc'].errors">
+                    <div *ngIf="form.controls['cc'].errors['required']">
+                        Credit Card Number is required.
+                    </div>
+                    <div *ngIf="form.controls['cc'].errors['minlength']">
+                        The Credit Card number needs to be exactly 16 numbers.
+                    </div>
+                </div>
+            </ngb-alert>
+            <p style="color: grey; font-size: small;">We will not share your payment information with anyone.</p>
+            <button type="submit" [disabled]="form.invalid" class="btn btn-primary">Make Order</button>
         </div>
-        <div class="form-margin">
-            <h5>Address</h5>
-            <input class="form-control" type="text" required minlength="6" placeholder="(Minimum 6 characters)" size="50" [(ngModel)]="userAddress" name="address">
-        </div>
-        <div class="form-margin">
-            <h5>Credit Card Number</h5>
-            <input class="form-control" type="text" required minlength="16" maxlength="16" placeholder="(16-Digit Number)" size="50" [(ngModel)]="userCCNumber" name="cc">
-        </div>
-        <p style="color: grey; font-size: small;">We will not share your payment information with anyone.</p>
-        <button type="submit" [disabled]="form.invalid" class="btn btn-primary">Make Order</button>
     </form>
 </div>
