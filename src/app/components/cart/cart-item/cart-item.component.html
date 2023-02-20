@@ -2,7 +2,7 @@
 <div class="cart-item-details">
     <h5>{{productCart.product.name}}</h5>
     <p>€{{productCart.product.price}}</p>
-    <input class="number-input" type="number" name="quantity" [(ngModel)]="productCart.quantity" #t (change)="onChange(t.value)"/>
-    <button (click)="remove(productCart)" style="margin-top: 10px;" class="btn btn-secondary">Remove</button>
+    <input class="number-input centered-number-input" type="number" name="quantity" [(ngModel)]="productCart.quantity" #t (change)="onChange(t.value)"/>
+    <button (click)="remove(productCart)" style="margin-top: 10px;" class="btn btn-secondary remove-bnt">Remove</button>
 </div>
 

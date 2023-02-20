@@ -10,3 +10,23 @@ img {
     align-items: left;
     margin-left: 80px;
 }
+
+.remove-bnt {
+    background-color: azure;
+    color: black;
+    transition: background-color 0.5s;
+}
+
+.remove-bnt:hover {
+    background-color: #c92838;
+    color: white;
+}
+
+.centered-number-input {
+    text-align: center;
+}
+
+.total {
+    text-align: center;
+    align-items: center;
+}
